@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FMS Add Transaction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <style>
+      .backg {
+        background: rgba(255, 255, 255, 0.6);
+      }
+      #grad {
+        background-image: linear-gradient(to bottom right, rgba(255, 207, 207, 1), rgba(179, 239, 244, 1));
+      }
+      .bi {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+      }
+      
+      /* Sidebar */
+      
+      @media (min-width: 768px) {
+        .sidebar .offcanvas-lg {
+          position: -webkit-sticky;
+          position: sticky;
+          top: 48px;
+        }
+      
+        .navbar-search {
+          display: block;
+        }
+      }
+      
+      .sidebar .nav-link {
+        font-size: 0.875rem;
+        font-weight: 500;
+      }
+      
+      .sidebar .nav-link.active {
+        color: #2470dc;
+      }
+      
+      .sidebar-heading {
+        font-size: 0.75rem;
+      }
+      
+      /*Navbar*/
+      
+      .navbar-brand {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+      }
+      
+      .navbar .form-control {
+        padding: 0.75rem 1rem;
+      }
+      
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+      
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: solid rgba(0, 0, 0, 0.15);
+        border-width: 1px 0;
+        box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1), inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+      }
+      
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+      
+      .bi {
+        vertical-align: -0.125em;
+        fill: currentColor;
+      }
+      
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+      
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+      
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+      
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+      
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+  </head>
+
+  <body class="p-1">
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="file-earmark-text" viewBox="0 0 16 16">
+        <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+        <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+      </symbol>
+      <symbol id="graph-up" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z" />
+      </symbol>
+      <symbol id="file-plus" viewBox="0 0 16 16">
+        <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5z" />
+        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1" />
+      </symbol>
+      <symbol id="briefcase-fill" viewBox="0 0 16 16">
+        <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5" />
+        <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85z" />
+      </symbol>
+      <symbol id="door-closed" viewBox="0 0 16 16">
+        <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z" />
+        <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z" />
+      </symbol>
+    </svg>
+
+    <div class="container-fluid rounded" id="grad">
+      <div class="row mb-3">
+        <div class="sidebar col-md-3 col-lg-2 p-0 backg mb-2 pt-2">
+          <a class="navbar navbar-brand d-flex col-md-3 col-lg-12 px-3 fs-6 text-black h1" href="/"><b>FINANCE MANAGEMENT <br /> SYSTEM</b></a>
+          <ul class="nav flex-column mb-auto px-4">
+            <li class="nav-item">
+              <a type="button" class="btn btn-outline-info d-flex align-items-center mt-5 gap-2 px-4 mb-4" aria-current="page" href="/">
+                <svg class="bi">
+                  <use xlink:href="#graph-up" />
+                </svg>Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a type="button" class="btn btn-outline-info d-flex align-items-center gap-2 ps-4 mb-4" href="/add-spending">
+                <svg class="bi">
+                  <use xlink:href="#file-plus" />
+                </svg>Add a Transaction
+              </a>
+            </li>
+            <li class="nav-item">
+              <a type="button" class="btn btn-outline-info d-flex align-items-center gap-2 ps-4 mb-4" href="/spendings">
+                <svg class="bi">
+                  <use xlink:href="#file-earmark-text" />
+                </svg>View all Spendings
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a type="button" class="btn btn-outline-info d-flex align-items-center gap-2 px-4 mb-4" href="/my-profile">
+                <svg class="bi">
+                  <use xlink:href="#briefcase-fill" />
+                </svg>View Profile
+              </a>
+            </li>
+            <li class="nav-item">
+              <a type="button" class="btn btn-outline-info d-flex align-items-center gap-2 px-4 mb-4" href="/logout">
+                <svg class="bi">
+                  <use xlink:href="#door-closed" />
+                </svg>Sign out
+              </a>
+            </li>
+          </ul>
+        </div>
+        <main class="col-md-9 m-auto col-lg-6 px-md-4 mt-3 border rounded shadow mb-5 backg">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2"><b>Add Transaction</b></h1>
+          </div>
+          <form class="form-control mb-3" style="background: rgba(255, 255, 255, 0);" method="post" action="/add-spending">
+            {% csrf_token %}
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="PaidTo" class="form-label">Paid to</label>
+                <input type="text" class="form-control" name="PaidTo" id="PaidTo" placeholder="" value="" required />
+                <div class="invalid-feedback">Invalid</div>
+              </div>
+
+              <div class="col-sm-6">
+                <label for="amount" class="form-label">Amount</label>
+                <input type="number" class="form-control" name="Amount" id="amount" placeholder="" value="" required />
+                <div class="invalid-feedback">Invalid</div>
+              </div>
+              <div class="col-md-12">
+                <label for="Reason" class="form-label">Reason</label>
+                <select class="form-select" name="Reason" id="Reason" required>
+                  <option value="">Choose...</option>
+                  <option>Food</option>
+                  <option>Clothing</option>
+                  <option>Travel</option>
+                  <option>Medical</option>
+                  <option>Miscellaneous</option>
+                </select>
+                <div class="invalid-feedback">Please select a valid Reason.</div>
+              </div>
+              <div class="col-12" hidden>
+                <label for="FMSuser" class="form-label">Username <span class="text-body-secondary">(Fixed)</span></label>
+                <input type="text" readonly class="form-control" name="FMSuser" id="FMSuser" placeholder="" value="{{user.username}}" />
+                <div class="invalid-feedback">Please enter valid remarks.</div>
+              </div>
+
+              <div class="col-12">
+                <label for="remarks" class="form-label">Remarks <span class="text-body-secondary">(Optional)</span></label>
+                <input type="text" class="form-control" name="Remarks" id="remarks" placeholder="" />
+                <div class="invalid-feedback">Please enter valid remarks.</div>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Submit Transaction</button>
+            <div class="d-flex mt-2">
+              {% for message in messages %}
+                <h5 class="text-bg-success p-1"><strong>{{ message }}</strong></h5>
+              {% endfor %}
+            </div>
+          </form>
+        </main>
+      </div>
+      <br /><br /><br /><br /><br /><br />
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
+  </body>
+</html>
